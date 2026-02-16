@@ -1,10 +1,10 @@
 ::selection {
   color: blue;
-  background: Khaki;
+  background: yellow;
 }
 
 p, h2 {
-    font-size: 16.5px !important;
+    font-size: 18.5px !important;
 }
 
 div[data-testid="column"]:nth-child(1) {
@@ -16,6 +16,7 @@ div[data-testid="column"]:nth-child(1) {
 ul[data-testid="stSelectboxVirtualDropdown"] li[aria-selected="true"] {
                             background-color: #fd7f6f;  
                             color: #FFFFFF; 
+							font-size: 18.5px;
 }
 
 .element-container div[data-baseweb="select"]:hover {
@@ -27,6 +28,7 @@ ul[data-testid="stSelectboxVirtualDropdown"] li[aria-selected="true"] {
 	height: 59px;
 	padding-top: 10px; 
     padding-bottom: 10px;
+	font-size: 18.5px
 }
 
 .element-container:nth-of-type(1) button:hover {
@@ -60,6 +62,10 @@ ul[data-testid="stSelectboxVirtualDropdown"] li[aria-selected="true"] {
 	color: white;
 }
 
+.element-container:nth-of-type(1) input:{
+	font-size: 30px;
+}
+
 .element-container:nth-of-type(1) input:active {
 	text-decoration-line: underline; 
 	text-align: center;
@@ -89,6 +95,7 @@ h1:hover, h2:hover, h3:hover, p:hover {
 	height: 45px;
 	padding-top: 10px; 
     padding-bottom: 10px;
+	font-size: 18.5px;
 }
 
 [data-testid="stFileUploaderDropzone"] [data-testid="stBaseButton-secondary"]:active{
@@ -124,6 +131,7 @@ h1:hover, h2:hover, h3:hover, p:hover {
 
 div[data-testid="stExpander"]:hover {
     box-shadow: 2px 3px 5px #888;
+	font-size: 18.5px;
 }
 
 
