@@ -10,7 +10,6 @@ import pandas as pd
 from docx import Document
 from io import BytesIO
 from io import StringIO
-import streamlit_scrollable_textbox as stx
 from odf.opendocument import OpenDocumentText
 from odf.style import Style, TextProperties, ParagraphProperties
 from odf.text import H, P
@@ -92,7 +91,7 @@ class operatorsFiles():
             strFile = 'do único arquivo selecionado.'
         else:
             strFile = f'dos {nFiles} arquivos selecionados.'
-        textFinal = f'\n🖍️ Nome, numeração e conteúdo {strFile}\n'
+        textFinal = f'🖍️ ***Nome, numeração e conteúdo {strFile}***<br>'
         textIni = f'"{textFinal}".'
         nLines = 0
         for t, textFile in enumerate(textFileAll):
@@ -100,13 +99,15 @@ class operatorsFiles():
                 textFile = ''.join(textFile)
             nLines += len(textFile.split('\n'))
             nameFile = f'🗁 {allNames[t]}   ➤  {t+1} de {nFiles}'
-            prefix = f'{self.line}\n{nameFile}\n'
-            content = f'{self.line}\n{textFile}\n'            
-            textFinal += f'{prefix}{content}\n'
-        hgtLines = 25 * (nLines + 4)
-        if hgtLines >= 1500:
-            hgtLines = 1500
-        stx.scrollableTextbox(textFinal, height=hgtLines, border=True)
+            prefix = f'{self.line}<br>{nameFile}<br>'
+            content = f'{self.line}<br>{textFile}<br>'   
+            content = content.replace('\n', '<br>')
+            textFinal += f'<br>{prefix}{content}<br>'
+        hgtLines = 30 * (nLines + 4)
+        if hgtLines >= 2500:
+            hgtLines = 2500
+        with st.container(height=hgtLines):
+            st.markdown(textFinal, unsafe_allow_html=True)
         objMens = messages(textIni, None, None, None, None)
         objMens.mensExib()
         
@@ -252,7 +253,6 @@ class main():
         self.nameOpts = [value[0] for value in self.values]
         self.keyButts = [value[1] for value in self.values]
         self.disabs = [True for w in range(len(self.keyButts))]
-        st.text('mmmm')
         with st.container(border=4):
             colDown, colButton = st.columns([25, 17], width='stretch')
             with colDown:
@@ -430,7 +430,7 @@ class main():
         self.dictMedia = {ext:[] for ext in self.extOrders}
         self.dictMedia['screen'] = []
         self.keysMedia = list(self.dictMedia.keys())
-        dirMedia = 'media/'
+        dirMedia = 'media\'
         files = [file for file in os.listdir(dirMedia) if os.path.splitext(file)[1] == '.jpg']
         files += [file for file in os.listdir(dirMedia) if os.path.splitext(file)[1] == '.webm']
         for key in self.keysMedia:
@@ -563,13 +563,9 @@ class main():
         page_title="Ex-stream-ly Cool App",
         page_icon="🧊",
         layout="wide")   
-        with open('configCss.css') as f:
+        with open('css') as f:
             css = f.read()
         st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
 
 if __name__ == '__main__':
-
     main()
-
-
-
