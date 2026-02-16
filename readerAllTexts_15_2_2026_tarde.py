@@ -430,7 +430,7 @@ class main():
         self.dictMedia = {ext:[] for ext in self.extOrders}
         self.dictMedia['screen'] = []
         self.keysMedia = list(self.dictMedia.keys())
-        dirMedia = 'media\'
+        dirMedia = 'media/'
         files = [file for file in os.listdir(dirMedia) if os.path.splitext(file)[1] == '.jpg']
         files += [file for file in os.listdir(dirMedia) if os.path.splitext(file)[1] == '.webm']
         for key in self.keysMedia:
@@ -570,3 +570,4 @@ class main():
 if __name__ == '__main__':
 
     main()
+
