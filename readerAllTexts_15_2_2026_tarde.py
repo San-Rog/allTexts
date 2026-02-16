@@ -35,15 +35,17 @@ class messages():
         nLabel = len(self.label)
         nMensStr = round(len(self.mensStr)/3, 0)
         nStr = nLabel + nMensStr
-        if self.label in ['ODT']:
+        if self.label == 'ODT':
             y = 3.1
+        elif self.label == 'HTML':
+            y = 3.5
         else:
             if nStr == 38:
                 y = 3.1
             elif nStr == 39:
                 y = 3.4
             else:
-                y = 3.6
+                y = 3.8
         colMens, colDown = st.columns([nMensStr, y], width='stretch', vertical_alignment='center')
         colDown.download_button(
             label=self.label,
@@ -578,6 +580,7 @@ class main():
 
 if __name__ == '__main__':
     main()
+
 
 
 
