@@ -85,7 +85,7 @@ class operatorsFiles():
         return textAll
         
     def txtToScroll(self, textFileAll, allNames): 
-        self.line = '—'*80
+        self.line = '—'*70
         nFiles = len(textFileAll)
         if nFiles <= 1:
             strFile = 'do único arquivo selecionado.'
@@ -569,6 +569,7 @@ class main():
 
 if __name__ == '__main__':
     main()
+
 
 
 
