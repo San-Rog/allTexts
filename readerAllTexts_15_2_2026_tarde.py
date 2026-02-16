@@ -563,10 +563,11 @@ class main():
         page_title="Ex-stream-ly Cool App",
         page_icon="🧊",
         layout="wide")   
-        with open('css') as f:
+        with open('configCss.css') as f:
             css = f.read()
         st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
 
 if __name__ == '__main__':
     main()
+
 
