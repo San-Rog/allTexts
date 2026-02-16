@@ -39,7 +39,7 @@ class messages():
             y = 2.8
         else:
             if nStr == 38:
-                y = 2.65
+                y = 2.8
             elif nStr == 39:
                 y = 3.1
             else:
@@ -578,3 +578,4 @@ class main():
 
 if __name__ == '__main__':
     main()
+
