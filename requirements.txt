@@ -4,6 +4,8 @@ textile==4.0.3
 python-docx==1.0.0
 odfpy==1.4.1
 fpdf==1.7.2
+pymupdf==1.26.3
+
 
 
 
