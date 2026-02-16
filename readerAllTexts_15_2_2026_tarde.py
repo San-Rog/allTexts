@@ -34,12 +34,12 @@ class messages():
     def mensResult(self):
         nLabel = len(self.label)
         if self.label in ['ODT', 'PDF'] or nLabel == 4:
-            y = 2.8
+            y = 3.0
         else:
             if nLabel == 3:
-                y = 2.4
+                y = 2.8
             elif nLabel == 5:
-                y = 3.1
+                y = 3.2
         colMens, colDown = st.columns([30, y], width='stretch', vertical_alignment='center')
         colDown.download_button(
             label=self.label,
@@ -569,6 +569,7 @@ class main():
 
 if __name__ == '__main__':
     main()
+
 
 
 
