@@ -36,15 +36,19 @@ class messages():
         nLabel = len(self.label)
         nMensStr = round(len(self.mensStr)/3, 0)
         nStr = nLabel + nMensStr
-        if self.label in ['ODT']:
-            y = 2.8
+        if self.label == 'ODT':
+            y = 3.1
+        elif self.label == 'HTML':
+            y = 3.5
         else:
             if nStr == 38:
-                y = 2.65
-            elif nStr == 39:
                 y = 3.1
-            else:
+            elif nStr == 39:
                 y = 3.4
+            elif nStr == 40:
+                y = 3.8
+            else:
+                y = 4.0
         colMens, colDown = st.columns([nMensStr, y], width='stretch', vertical_alignment='center')
         colDown.download_button(
             label=self.label,
@@ -449,7 +453,7 @@ class main():
         self.dictMedia = {ext:[] for ext in self.extOrders}
         self.dictMedia['screen'] = []
         self.keysMedia = list(self.dictMedia.keys())
-        dirMedia = r'C:\Users\ACER\Documents\media'
+        dirMedia = 'media/'
         files = [file for file in os.listdir(dirMedia) if os.path.splitext(file)[1] == '.jpg']
         files += [file for file in os.listdir(dirMedia) if os.path.splitext(file)[1] == '.webm']
         for key in self.keysMedia:
@@ -589,7 +593,7 @@ class main():
         page_title="Ex-stream-ly Cool App",
         page_icon="🧊",
         layout="wide")   
-        with open(r'C:\Users\ACER\Documents\css\configCss.css') as f:
+        with open('configCss.css') as f:
             css = f.read()
         st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
 
@@ -597,3 +601,4 @@ if __name__ == '__main__':
     if 'pdfYes' not in st.session_state:
        st.session_state.pdfYes = '' 
     main()
+
