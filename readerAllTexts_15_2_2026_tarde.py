@@ -44,8 +44,10 @@ class messages():
                 y = 3.1
             elif nStr == 39:
                 y = 3.4
-            else:
+            elif nStr == 40:
                 y = 3.8
+            else:
+                y = 4.0
         colMens, colDown = st.columns([nMensStr, y], width='stretch', vertical_alignment='center')
         colDown.download_button(
             label=self.label,
@@ -580,6 +582,7 @@ class main():
 
 if __name__ == '__main__':
     main()
+
 
 
 
