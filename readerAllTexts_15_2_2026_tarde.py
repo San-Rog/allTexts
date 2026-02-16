@@ -430,7 +430,7 @@ class main():
         self.dictMedia = {ext:[] for ext in self.extOrders}
         self.dictMedia['screen'] = []
         self.keysMedia = list(self.dictMedia.keys())
-        dirMedia = r'C:\Users\ACER\Documents\media'
+        dirMedia = 'media\'
         files = [file for file in os.listdir(dirMedia) if os.path.splitext(file)[1] == '.jpg']
         files += [file for file in os.listdir(dirMedia) if os.path.splitext(file)[1] == '.webm']
         for key in self.keysMedia:
@@ -563,9 +563,10 @@ class main():
         page_title="Ex-stream-ly Cool App",
         page_icon="🧊",
         layout="wide")   
-        with open(r'C:\Users\ACER\Documents\css\configCss.css') as f:
+        with open('configCss.css') as f:
             css = f.read()
         st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
 
 if __name__ == '__main__':
+
     main()
