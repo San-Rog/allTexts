@@ -34,9 +34,9 @@ class messages():
     def mensResult(self):
         nLabel = len(self.label)
         if self.label in ['ODT', 'PDF'] or nLabel == 4:
-            y = 3.0
+            y = 3.2
         else:
-            if nLabel == 3:
+            if nLabel == 3.2:
                 y = 2.6
             elif nLabel == 5:
                 y = 3.3
@@ -569,6 +569,7 @@ class main():
 
 if __name__ == '__main__':
     main()
+
 
 
 
