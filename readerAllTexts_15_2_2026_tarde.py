@@ -33,14 +33,18 @@ class messages():
         
     def mensResult(self):
         nLabel = len(self.label)
-        if self.label in ['ODT', 'PDF'] or nLabel == 4:
-            y = 3
+        nMensStr = round(len(self.mensStr)/3, 0)
+        nStr = nLabel + nMensStr
+        if self.label in ['ODT']:
+            y = 2.8
         else:
-            if nLabel == 3:
-                y = 2.8
-            elif nLabel == 5:
-                y = 3.2
-        colMens, colDown = st.columns([30, y], width='stretch', vertical_alignment='center')
+            if nStr == 38:
+                y = 2.65
+            elif nStr == 39:
+                y = 3.1
+            else:
+                y = 3.4
+        colMens, colDown = st.columns([nMensStr, y], width='stretch', vertical_alignment='center')
         colDown.download_button(
             label=self.label,
             data=self.data,
@@ -53,7 +57,7 @@ class messages():
         self.mensExib()
         
     @st.dialog('⚠️ Falha no app❗')
-    def mensOperation(self, str):
+    def mensError(self, str):
         st.markdown(f'{str} Entre em contato com o administrador da ferramenta!')
         
     @st.dialog(f'✅️ Resultado bem-sucedido!')
@@ -519,45 +523,50 @@ class main():
         self.index = [w + 1 for w in range(len(self.allExts))]   
     
     def processDown(self):
-        self.textFileAll = []
-        self.namesAll = []
-        objOperat = operatorsFiles(self.nDowns)
-        for d, down in enumerate(self.upDowns):
-            nameDown = down.name
-            keyDown = f'{nameDown}_{d+1}'
-            getDown = down.getvalue()
-            try:
-                stringIO = StringIO(getDown.decode('latin-1'))
-            except:
-                stringIO = StringIO(getDown.decode('cp1252'))
-            textFile = stringIO.read()
-            ext = os.path.splitext(nameDown)[1]
-            if ext == '.docx':
-                textFile = objOperat.docxToTxt(down)
-            elif ext == '.odt':
-                textFile = objOperat.odtToTxt(down)
-            elif ext == '.rtf':
-                textFile = objOperat.rtfToTxt(down)
-            self.textFileAll.append(textFile)
-            self.namesAll.append(nameDown)
-        with st.spinner('❯❯❯❯ Operação em andamento...', show_time=True, width='content'):
-            if self.screen: 
-                objOperat.txtToScroll(self.textFileAll, self.namesAll)
-            elif self.txt:
-                objOperat.txtToTxt(self.textFileAll)
-            elif self.docx:
-                objOperat.txtToDocx(self.textFileAll)
-            elif self.html: 
-                objOperat.txtToHtml(self.textFileAll)
-            elif self.rtf:
-                objOperat.txtToRtf(self.textFileAll)
-            elif self.ods:
-                objOperat.txtToOdt(self.textFileAll)
-            elif self.xhtml:
-                objOperat.txtToXhtml(self.textFileAll)
-            elif self.pdf:
-                objOperat.txtToPdf(self.textFileAll)
-                
+        try:
+            self.textFileAll = []
+            self.namesAll = []
+            objOperat = operatorsFiles(self.nDowns)
+            for d, down in enumerate(self.upDowns):
+                nameDown = down.name
+                keyDown = f'{nameDown}_{d+1}'
+                getDown = down.getvalue()
+                try:
+                    stringIO = StringIO(getDown.decode('latin-1'))
+                except:
+                    stringIO = StringIO(getDown.decode('cp1252'))
+                textFile = stringIO.read()
+                ext = os.path.splitext(nameDown)[1]
+                if ext == '.docx':
+                    textFile = objOperat.docxToTxt(down)
+                elif ext == '.odt':
+                    textFile = objOperat.odtToTxt(down)
+                elif ext == '.rtf':
+                    textFile = objOperat.rtfToTxt(down)
+                self.textFileAll.append(textFile)
+                self.namesAll.append(nameDown)
+            with st.spinner('❯❯❯❯ Operação em andamento...', show_time=True, width='content'):
+                if self.screen: 
+                    objOperat.txtToScroll(self.textFileAll, self.namesAll)
+                elif self.txt:
+                    objOperat.txtToTxt(self.textFileAll)
+                elif self.docx:
+                    objOperat.txtToDocx(self.textFileAll)
+                elif self.html: 
+                    objOperat.txtToHtml(self.textFileAll)
+                elif self.rtf:
+                    objOperat.txtToRtf(self.textFileAll)
+                elif self.ods:
+                    objOperat.txtToOdt(self.textFileAll)
+                elif self.xhtml:
+                    objOperat.txtToXhtml(self.textFileAll)
+                elif self.pdf:
+                    objOperat.txtToPdf(self.textFileAll)
+        except Exception as error: 
+            textError = f'Ocorreu o seguinte erro na operação:\n:green[***{error}***].' 
+            objMens = messages(textError, None, None, None, None)
+            objMens.mensError(textError) 
+        
     def setPage(self):
         st.set_page_config(
         page_title="Ex-stream-ly Cool App",
@@ -569,17 +578,3 @@ class main():
 
 if __name__ == '__main__':
     main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
