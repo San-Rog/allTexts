@@ -1,0 +1,17 @@
+streamlit==1.53.1
+pandas==2.3.3
+textile==4.0.3
+fpdf==2.8.5
+python-docx==1.0.0
+odf==1.4.1
+streamlit_scrollable_textbox
+
+
+
+
+
+
+
+
+
+
