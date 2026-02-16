@@ -36,12 +36,12 @@ class messages():
         nMensStr = round(len(self.mensStr)/3, 0)
         nStr = nLabel + nMensStr
         if self.label in ['ODT']:
-            y = 2.8
+            y = 3.0
         else:
             if nStr == 38:
-                y = 2.8
-            elif nStr == 39:
                 y = 3.1
+            elif nStr == 39:
+                y = 3.2
             else:
                 y = 3.4
         colMens, colDown = st.columns([nMensStr, y], width='stretch', vertical_alignment='center')
@@ -578,4 +578,5 @@ class main():
 
 if __name__ == '__main__':
     main()
+
 
