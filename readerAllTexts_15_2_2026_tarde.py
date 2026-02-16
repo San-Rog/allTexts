@@ -5,6 +5,7 @@ import io
 import time
 import textwrap
 import textile
+import pymupdf
 from fpdf import FPDF
 import pandas as pd
 from docx import Document
@@ -35,19 +36,15 @@ class messages():
         nLabel = len(self.label)
         nMensStr = round(len(self.mensStr)/3, 0)
         nStr = nLabel + nMensStr
-        if self.label == 'ODT':
-            y = 3.1
-        elif self.label == 'HTML':
-            y = 3.5
+        if self.label in ['ODT']:
+            y = 2.8
         else:
             if nStr == 38:
-                y = 3.1
+                y = 2.65
             elif nStr == 39:
-                y = 3.4
-            elif nStr == 40:
-                y = 3.8
+                y = 3.1
             else:
-                y = 4.0
+                y = 3.4
         colMens, colDown = st.columns([nMensStr, y], width='stretch', vertical_alignment='center')
         colDown.download_button(
             label=self.label,
@@ -79,7 +76,17 @@ class operatorsFiles():
         doc = Document(fileDown)
         textAll = [para.text + '\n' for para in doc.paragraphs]
         return textAll
-    
+        
+    @st.cache_data
+    def pdfToTxt(_self, fileDown):
+        with open('prov.pdf', 'wb') as f:
+            f.write(fileDown.getbuffer())
+        pages = pymupdf.open('prov.pdf')
+        textAll = ''
+        for page in pages:
+            textAll += page.get_text() + '\n'
+        return textAll
+        
     @st.cache_data
     def odtToTxt(_self, fileDown):
         doc = load(fileDown)
@@ -234,7 +241,7 @@ class main():
         self.setPage()
         self.exts = sorted(['txt', 'csv', 'tsv', 'py', 'json', 'js', 'html', 'docx', 'odt', 
                             'rtf', 'log', 'bat', 'php', 'css', 'xml', 'msg', 'md', 'cfg', 'conf', 
-                            'jsp', 'cpp', 'sql', 'jspx', 'tex', 'xhtml'])
+                            'jsp', 'cpp', 'sql', 'jspx', 'tex', 'xhtml', 'pdf'])
         self.exts = [ext.upper() for ext in self.exts]
         self.nExts = len(self.exts)
         self.extsStr = ', '.join(self.exts[:-1])
@@ -365,7 +372,7 @@ class main():
             self.disabs[indDown] = True
         except:
             pass
-        
+            
     def formatTab(self, mode):
         if mode == 0:
             self.formatExpander()
@@ -390,7 +397,11 @@ class main():
             textIncr = list(map(textLbd, self.extOrders))
             textAdds = (f'3️⃣ Devido a problemas de :violet[**formatação**] (⚙️), '
                         'o texto resultante poderá conter símbolos :violet[**estranhos**] (�).\n\n'  
-                        '4️⃣É sempre recomendável :violet[**conferência**] (↔) com o original.')                         
+                        '4️⃣ É sempre recomendável a :violet[**conferência**] (↔) com o original.\n\n'
+                        '5️⃣ O arquivo convertido não conservará nem herdará a formatação primitiva.\n\n'
+                        '6️⃣ Se qualquer dos arquivos selecionados for :violet[**PDF**], a :violet[**extração**] '
+                        'de texto dependerá de ser ele :violet[**pesquisável**] (🔎) na origem ou após aplicação'
+                        'de :violet[**OCR**] (https://pt.wikipedia.org/wiki/Reconhecimento_%C3%B3tico_de_caracteres).')
             lambImg = lambda a: [file for file in self.dictMedia[self.keysMedia[a]] if file.find('image') >= 0]
             lambVd = lambda a: [file for file in self.dictMedia[self.keysMedia[a]] if file.find('vídeo') >= 0]
             self.imgVd = {0:[lambImg(-1), lambVd(-1), f'{textScreen}\n\n{textAdds}'], 
@@ -438,7 +449,7 @@ class main():
         self.dictMedia = {ext:[] for ext in self.extOrders}
         self.dictMedia['screen'] = []
         self.keysMedia = list(self.dictMedia.keys())
-        dirMedia = 'media/'
+        dirMedia = r'C:\Users\ACER\Documents\media'
         files = [file for file in os.listdir(dirMedia) if os.path.splitext(file)[1] == '.jpg']
         files += [file for file in os.listdir(dirMedia) if os.path.splitext(file)[1] == '.webm']
         for key in self.keysMedia:
@@ -543,6 +554,8 @@ class main():
                 ext = os.path.splitext(nameDown)[1]
                 if ext == '.docx':
                     textFile = objOperat.docxToTxt(down)
+                elif ext.lower() == '.pdf':
+                    textFile = objOperat.pdfToTxt(down)
                 elif ext == '.odt':
                     textFile = objOperat.odtToTxt(down)
                 elif ext == '.rtf':
@@ -576,15 +589,11 @@ class main():
         page_title="Ex-stream-ly Cool App",
         page_icon="🧊",
         layout="wide")   
-        with open('configCss.css') as f:
+        with open(r'C:\Users\ACER\Documents\css\configCss.css') as f:
             css = f.read()
         st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
 
 if __name__ == '__main__':
+    if 'pdfYes' not in st.session_state:
+       st.session_state.pdfYes = '' 
     main()
-
-
-
-
-
-
