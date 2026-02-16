@@ -10,7 +10,7 @@ import pandas as pd
 from docx import Document
 from io import BytesIO
 from io import StringIO
-import streamlit-scrollable-textbox as stx
+import streamlit_scrollable_textbox as stx
 from odf.opendocument import OpenDocumentText
 from odf.style import Style, TextProperties, ParagraphProperties
 from odf.text import H, P
@@ -570,5 +570,6 @@ class main():
 if __name__ == '__main__':
 
     main()
+
 
 
