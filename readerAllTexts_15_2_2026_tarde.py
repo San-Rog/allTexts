@@ -37,7 +37,7 @@ class messages():
             y = 3.0
         else:
             if nLabel == 3:
-                y = 3.0
+                y = 2.6
             elif nLabel == 5:
                 y = 3.3
         colMens, colDown = st.columns([30, y], width='stretch', vertical_alignment='center')
