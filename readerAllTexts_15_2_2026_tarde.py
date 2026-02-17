@@ -26,7 +26,7 @@ class messages():
         self.nFiles = args[4]
         if None not in args:        
             self.mensStr = (f':blue[**{self.fileOut}**] com ***{self.nFiles} arquivo(s)***. Para abri-lo, ' 
-                        'pressione (👇) o botão ao lado ➜.') 
+                            'pressione (👇) o botão ao lado ➜.') 
             self.mensResult()
             self.exprGer = 'Gerado o arquivo para download❗'
         else:
@@ -62,19 +62,20 @@ class messages():
         self.mensExib()
         
     def mensToast(self): 
-        textToast = ['1️⃣ Para maiores detalhes, consulte a opção **Detalhes do app**.', 
-                    '2️⃣ Nela, você encontrará **Formatos do app** e **Funcionalidades do app**.', 
+        textToast = ['1️⃣ Para maiores detalhes, consulte a opção Detalhes do app.', 
+                    '2️⃣ Nela, você encontrará Formatos do app e Funcionalidades do app.', 
                     ('3️⃣ Devido a problemas de formatação, o texto resultante poderá conter ' 
                      'símbolos estranhos.'),   
                     '4️⃣ É sempre recomendável a conferência com o original.',
                     '5️⃣ O arquivo convertido não conservará nem herdará a formatação primitiva.',
-                    '6️⃣ Selecionado arquivo PDF, convém verificar se é pesquisável ou tem OCR.']
-        #placeholder = st.empty()
-        msg = st.toast('🪄 :violet[**6 dicas fundamentais**]❗')
+                    '6️⃣ Se Selecionado arquivo PDF, convém verificar se é pesquisável ou tem OCR.']
+                    
+        msg = st.toast('🪄 Espere a exibição destas :violet[**6 dicas fundamentais**]❗')
+        textToast.insert(0, '(✋ Evite fechar as janelas (⿻)❗)')
         for text in textToast: 
-            time.sleep(3)
+            time.sleep(1)
             msg.toast(text)
-    
+        
     @st.dialog('⚠️ Falha no app❗')
     def mensError(self, str):
         st.markdown(f'{str} Entre em contato com o administrador da ferramenta!')
@@ -296,7 +297,8 @@ class main():
                                                   placeholder='Únicos formatos desejados',  
                                                   help='Restringe os tipos de arquivo desejados. '
                                                        f'Se nada for escolhido, valerão estes :blue[***{self.nExts} formatos***]:\n'
-                                                       f'{self.extsStr}.')
+                                                       f'{self.extsStr}.', 
+                                                  disabled=st.session_state.multSel)
                     if self.options == []:
                         typeSel = self.exts
                         helpStr = (f'Selecione ou arraste arquivos com qualquer um destes '
@@ -317,7 +319,8 @@ class main():
                                                     type=typeSel, 
                                                     help=helpStr, 
                                                     max_upload_size=1024*20, 
-                                                    width='stretch')
+                                                    width='stretch', 
+                                                    disabled=st.session_state.fileDown)
                     self.nDowns = len(self.upDowns)
                     self.nKeys = len(self.keyButts)
                     if self.nDowns:
@@ -380,6 +383,9 @@ class main():
             objMens = messages('toast', None, None, None, None)
             objMens.mensToast() 
             st.session_state.toast = True
+            st.session_state.multSel = False
+            st.session_state.fileDown = False
+            st.rerun()
         if self.nDowns >= 1:
             self.processDown() 
     
@@ -618,10 +624,8 @@ class main():
 if __name__ == '__main__':
     if 'toast' not in st.session_state:
         st.session_state.toast = False
+    if 'multSel' not in st.session_state:
+        st.session_state.multSel = True
+    if 'fileDown' not in st.session_state:
+        st.session_state.fileDown = True
     main()
-
-
-
-
-
-
