@@ -68,7 +68,7 @@ class messages():
                      'símbolos estranhos.'),   
                     '4️⃣ É sempre recomendável a conferência com o original.',
                     '5️⃣ O arquivo convertido não conservará nem herdará a formatação primitiva.',
-                    '6️⃣ Se Selecionado arquivo PDF, convém verificar se é pesquisável ou tem OCR.']
+                    '6️⃣ Selecionado arquivo PDF, convém verificar se é pesquisável ou tem OCR.']
         #placeholder = st.empty()
         msg = st.toast('🪄 6 relevantes dicas fundamentais❗')
         for text in textToast: 
@@ -617,5 +617,6 @@ if __name__ == '__main__':
     if 'pdfYes' not in st.session_state:
        st.session_state.pdfYes = '' 
     main()
+
 
 
