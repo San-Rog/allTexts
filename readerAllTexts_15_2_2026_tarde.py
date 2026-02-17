@@ -62,8 +62,8 @@ class messages():
         self.mensExib()
         
     def mensToast(self): 
-        textToast = ['1️⃣ Para maiores detalhes, consulte a opção Detalhes do app.', 
-                    '2️⃣ Nela, você encontrará Formatos do app e Funcionalidades do app.', 
+        textToast = ['1️⃣ Para maiores detalhes, consulte a opção **Detalhes do app**.', 
+                    '2️⃣ Nela, você encontrará **Formatos do app** e **Funcionalidades do app**.', 
                     ('3️⃣ Devido a problemas de formatação, o texto resultante poderá conter ' 
                      'símbolos estranhos.'),   
                     '4️⃣ É sempre recomendável a conferência com o original.',
@@ -617,6 +617,7 @@ if __name__ == '__main__':
     if 'pdfYes' not in st.session_state:
        st.session_state.pdfYes = '' 
     main()
+
 
 
 
