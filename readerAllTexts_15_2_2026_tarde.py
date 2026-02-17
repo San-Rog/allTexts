@@ -61,6 +61,20 @@ class messages():
         self.label = f'"{self.mensStr}".'
         self.mensExib()
         
+    def mensToast(self): 
+        textToast = ['1️⃣ Para maiores detalhes, consulte a opção Detalhes do app.', 
+                    '2️⃣ Nela, você encontrará Formatos do app e Funcionalidades do app.', 
+                    ('3️⃣ Devido a problemas de formatação, o texto resultante poderá conter ' 
+                     'símbolos estranhos.'),   
+                    '4️⃣ É sempre recomendável a conferência com o original.',
+                    '5️⃣ O arquivo convertido não conservará nem herdará a formatação primitiva.',
+                    '6️⃣ Se Selecionado arquivo PDF, convém verificar se é pesquisável ou tem OCR.']
+        #placeholder = st.empty()
+        msg = st.toast('🪄 6 relevantes dicas fundamentais❗')
+        for text in textToast: 
+            time.sleep(3)
+            msg.toast(text)
+    
     @st.dialog('⚠️ Falha no app❗')
     def mensError(self, str):
         st.markdown(f'{str} Entre em contato com o administrador da ferramenta!')
@@ -362,6 +376,8 @@ class main():
                 self.formatTab(0)
             with tabTwo:
                 self.formatTab(1)
+        objMens = messages('toast', None, None, None, None)
+        objMens.mensToast()
         if self.nDowns >= 1:
             self.processDown() 
     
@@ -601,4 +617,5 @@ if __name__ == '__main__':
     if 'pdfYes' not in st.session_state:
        st.session_state.pdfYes = '' 
     main()
+
 
