@@ -134,23 +134,16 @@ div[data-testid="stExpander"]:hover {
 	font-size: 18.5px;
 }
 
+div[data-testid="toastContainer"] {
+    padding: 10px 20px 100px 50px;
+    align-items: stretch;
+	top: auto;
+    bottom: 2rem;
+	width: 100%;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+div[data-testid="stToast"] {
+	width: auto; 
+    bottom: 2rem;
+	transform: translateY(700%);
+}
