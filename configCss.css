@@ -135,7 +135,7 @@ div[data-testid="stExpander"]:hover {
 }
 
 div[data-testid="toastContainer"] {
-    padding: 10px 20px 100px 50px;
+    padding: 0px 20px 100px 50px;
     align-items: stretch;
 	top: auto;
     bottom: 2rem;
@@ -145,5 +145,9 @@ div[data-testid="toastContainer"] {
 div[data-testid="stToast"] {
 	width: auto; 
     bottom: 2rem;
-	transform: translateY(700%);
+	transform: translateY(-10%);
 }
+
+
+
+
