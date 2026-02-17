@@ -376,8 +376,10 @@ class main():
                 self.formatTab(0)
             with tabTwo:
                 self.formatTab(1)
-        objMens = messages('toast', None, None, None, None)
-        objMens.mensToast()
+        if not st.session_state.toast:
+            objMens = messages('toast', None, None, None, None)
+            objMens.mensToast() 
+            st.session_state.toast = True
         if self.nDowns >= 1:
             self.processDown() 
     
@@ -614,9 +616,10 @@ class main():
         st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
 
 if __name__ == '__main__':
-    if 'pdfYes' not in st.session_state:
-       st.session_state.pdfYes = '' 
+    if 'toast' not in st.session_state:
+        st.session_state.toast = False
     main()
+
 
 
 
