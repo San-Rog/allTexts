@@ -70,7 +70,7 @@ class messages():
                     '5️⃣ O arquivo convertido não conservará nem herdará a formatação primitiva.',
                     '6️⃣ Selecionado arquivo PDF, convém verificar se é pesquisável ou tem OCR.']
         #placeholder = st.empty()
-        msg = st.toast('🪄 6 relevantes dicas fundamentais❗')
+        msg = st.toast('🪄 :violet[**6 dicas fundamentais**]❗')
         for text in textToast: 
             time.sleep(3)
             msg.toast(text)
@@ -617,6 +617,7 @@ if __name__ == '__main__':
     if 'pdfYes' not in st.session_state:
        st.session_state.pdfYes = '' 
     main()
+
 
 
 
