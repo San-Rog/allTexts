@@ -63,7 +63,7 @@ class messages():
         
     def mensToast(self): 
         textToast = ['1️⃣ Para maiores detalhes, consulte a opção :violet[**Detalhes do app**].', 
-                    '2️⃣ Nela, você encontrará :violet[**Formatos do app**] e :violet[**Funcionalidades do app*].', 
+                    '2️⃣ Nela, você encontrará :violet[**Formatos do app**] e :violet[**Funcionalidades do app**].', 
                     ('3️⃣ Devido a problemas de formatação, o texto resultante poderá conter ' 
                      ':violet[**símbolos**] estranhos.'),   
                     '4️⃣ É sempre recomendável a :violet[**conferência**] com o original.',
@@ -628,6 +628,7 @@ if __name__ == '__main__':
     if 'fileDown' not in st.session_state:
         st.session_state.fileDown = True
     main()
+
 
 
 
