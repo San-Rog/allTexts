@@ -3,12 +3,8 @@
   background: yellow;
 }
 
-h2 {
-    font-size: 18.5px !important;
-}
-
-p {
-	font-size: 12px !important;
+h2, p {
+    font-size: 17px !important;
 }
 
 div[data-testid="column"]:nth-child(1) {
@@ -151,6 +147,7 @@ div[data-testid="stToast"] {
     bottom: 2rem;
 	transform: translateY(-10%);
 }
+
 
 
 
