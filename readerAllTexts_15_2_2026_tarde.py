@@ -72,8 +72,8 @@ class messages():
         msg = st.toast('🪄 Espere a exibição destas :violet[**6 dicas fundamentais**]❗')
         textToast.insert(0, '(✋ Evite fechar as janelas (⿻)❗)')
         for text in textToast: 
-            time.sleep(2.5)
             msg.toast(text)
+            time.sleep(2.5)
         
     @st.dialog('⚠️ Falha no app❗')
     def mensError(self, str):
@@ -628,6 +628,7 @@ if __name__ == '__main__':
     if 'fileDown' not in st.session_state:
         st.session_state.fileDown = True
     main()
+
 
 
 
