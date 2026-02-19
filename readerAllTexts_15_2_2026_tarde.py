@@ -68,7 +68,7 @@ class messages():
                      'símbolos estranhos.'),   
                     '4️⃣ É sempre recomendável a conferência com o original.',
                     '5️⃣ O arquivo convertido não conservará nem herdará a formatação primitiva.',
-                    '6️⃣ Se Selecionado arquivo PDF, convém verificar se é pesquisável ou tem OCR.']
+                    '6️⃣ Selecionado arquivo PDF, verificar se é pesquisável ou tem OCR.']
                     
         msg = st.toast('🪄 Espere a exibição destas :violet[**6 dicas fundamentais**]❗')
         textToast.insert(0, '(✋ Evite fechar as janelas (⿻)❗)')
@@ -629,4 +629,5 @@ if __name__ == '__main__':
     if 'fileDown' not in st.session_state:
         st.session_state.fileDown = True
     main()
+
 
