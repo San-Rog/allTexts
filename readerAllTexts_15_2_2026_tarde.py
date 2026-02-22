@@ -577,17 +577,18 @@ class main():
                     stringIO = StringIO(getDown.decode('latin-1'))
                 except:
                     stringIO = StringIO(getDown.decode('cp1252'))
-                textFile = stringIO.read()
+                self.textFile = stringIO.read()
                 ext = os.path.splitext(nameDown)[1]
                 if ext == '.docx':
-                    textFile = objOperat.docxToTxt(down)
+                    self.textFile = objOperat.docxToTxt(down)
                 elif ext.lower() == '.pdf':
-                    textFile = objOperat.pdfToTxt(down)
+                    self.textFile = objOperat.pdfToTxt(down)
                 elif ext == '.odt':
-                    textFile = objOperat.odtToTxt(down)
+                    self.textFile = objOperat.odtToTxt(down)
                 elif ext == '.rtf':
-                    textFile = objOperat.rtfToTxt(down)
-                self.textFileAll.append(textFile)
+                    self.textFile = objOperat.rtfToTxt(down)
+                self.checkSizeText()
+                self.textFileAll.append(self.textFile)
                 self.namesAll.append(nameDown)
             with st.spinner('❯❯❯❯ Operação em andamento...', show_time=True, width='content'):
                 if self.screen: 
@@ -610,7 +611,14 @@ class main():
             textError = f'Ocorreu o seguinte erro na operação:\n:green[***{error}***].' 
             objMens = messages(textError, None, None, None, None)
             objMens.mensError(textError) 
-        
+
+    def checkSizeText(self):
+        self.textFileStr = self.textFile.replace('\n', '').strip()
+        if len(self.textFileStr) == 0:
+            textRep = '-'*80
+            textContent = 'Conteúdo não passível de leitura pela ferramenta!'
+            self.textFile = f'\n{textContent.center(80, '#')}\n'
+            
     def setPage(self):
         st.set_page_config(
         page_title="Ex-stream-ly Cool App",
@@ -628,6 +636,7 @@ if __name__ == '__main__':
     if 'fileDown' not in st.session_state:
         st.session_state.fileDown = True
     main()
+
 
 
 
