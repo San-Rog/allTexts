@@ -63,11 +63,11 @@ class messages():
         
     def mensToast(self): 
         textToast = ['1️⃣ Para maiores detalhes, consulte a opção :violet[**Detalhes do app**].', 
-                    '2️⃣ Nela, você encontrará :violet[**Formatos do app**] e :violet[**Funcionalidades do app**].', 
+                    '2️⃣ Ali, você encontrará :violet[**Formatos do app**] e :violet[**Funcionalidades do app**].', 
                     ('3️⃣ Devido a problemas de formatação, o texto resultante poderá conter ' 
                      ':violet[**símbolos**] estranhos.'),   
                     '4️⃣ É sempre recomendável a :violet[**conferência**] com o original.',
-                    '5️⃣ O arquivo  :violet[**convertido**] não conservará nem herdará a formatação primitiva.',
+                    '5️⃣ Em geral, o arquivo  :violet[**convertido**] não conservará nem herdará a formatação primitiva.',
                     '6️⃣ Selecionado arquivo :violet[**PDF**], convém verificar se é pesquisável ou tem :violet[**OCR**].']
         msg = st.toast('🪄 Espere a exibição destas :violet[**6 dicas fundamentais**]❗')
         textToast.insert(1, '(✋ Evite fechar as janelas (⿻)❗)')
@@ -628,6 +628,7 @@ if __name__ == '__main__':
     if 'fileDown' not in st.session_state:
         st.session_state.fileDown = True
     main()
+
 
 
 
