@@ -16,7 +16,7 @@ div[data-testid="column"]:nth-child(1) {
 ul[data-testid="stSelectboxVirtualDropdown"] li[aria-selected="true"] {
                             background-color: #fd7f6f;  
                             color: #FFFFFF; 
-							font-size: 18.5px;
+							font-size: 17px;
 }
 
 .element-container div[data-baseweb="select"]:hover {
@@ -28,7 +28,7 @@ ul[data-testid="stSelectboxVirtualDropdown"] li[aria-selected="true"] {
 	height: 59px;
 	padding-top: 10px; 
     padding-bottom: 10px;
-	font-size: 18.5px
+	font-size: 17px
 }
 
 .element-container:nth-of-type(1) button:hover {
@@ -95,7 +95,7 @@ h1:hover, h2:hover, h3:hover, p:hover {
 	height: 45px;
 	padding-top: 10px; 
     padding-bottom: 10px;
-	font-size: 18.5px;
+	font-size: 17px;
 }
 
 [data-testid="stFileUploaderDropzone"] [data-testid="stBaseButton-secondary"]:active{
@@ -131,7 +131,7 @@ h1:hover, h2:hover, h3:hover, p:hover {
 
 div[data-testid="stExpander"]:hover {
     box-shadow: 2px 3px 5px #888;
-	font-size: 18.5px;
+	font-size: 17px;
 }
 
 div[data-testid="toastContainer"] {
@@ -147,6 +147,7 @@ div[data-testid="stToast"] {
     bottom: 2rem;
 	transform: translateY(-10%);
 }
+
 
 
 
