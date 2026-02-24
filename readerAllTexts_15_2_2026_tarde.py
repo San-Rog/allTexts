@@ -144,8 +144,9 @@ class operatorsFiles():
         objMens = messages(textIni, None, None, None, None)
         objMens.mensExib()
         
-    def txtToTxt(self, textFile):
+    def txtToTxt(self, textFile, allNames):
         self.textFile = textFile
+        self.allNames = allNames
         self.mode = 1
         self.depureText()
         self.fileOut = 'arquivo_resultante.txt'
@@ -158,8 +159,9 @@ class operatorsFiles():
                 self.textPure = self.textPure.encode('utf-8').decode('utf-8')            
         messages('TXT', self.textPure, self.fileOut, 'text/plain', self.nFiles)
         
-    def txtToDocx(self, textFile):
+    def txtToDocx(self, textFile, allNames):
         self.textFile = textFile
+        self.allNames = allNames
         self.mode = 1
         self.depureText()
         self.fileOut = 'arquivo_resultante.docx' 
@@ -175,8 +177,9 @@ class operatorsFiles():
         bio.seek(0)
         self.ioDocx = bio.getvalue()
         
-    def txtToRtf(self, textFile):
+    def txtToRtf(self, textFile, allNames):
         self.textFile = textFile
+        self.allNames = allNames
         self.mode = 1
         self.depureText()
         self.fileOut = 'arquivo_resultante.rtf'
@@ -189,15 +192,17 @@ class operatorsFiles():
                 self.textPure = self.textPure.encode('utf-8').decode('utf-8') 
         messages('RTF', self.textPure, self.fileOut, 'application/rtf', self.nFiles)
     
-    def txtToHtml(self, textFile):
+    def txtToHtml(self, textFile, allNames):
         self.textFile = textFile
+        self.allNames = allNames
         self.mode = 0
         self.depureText()
         self.fileOut = 'arquivo_resultante.html'
         messages('HTML', self.textPure, self.fileOut, 'text/html', self.nFiles)
     
-    def txtToOdt(self, textFile): 
+    def txtToOdt(self, textFile, allNames):
         self.textFile = textFile
+        self.allNames = allNames
         self.mode = 1
         self.depureText()
         self.fileOut = 'arquivo_resultante.odt' 
@@ -205,16 +210,18 @@ class operatorsFiles():
         messages('ODT', self.ioOds, self.fileOut, 'application/vnd.oasis.opendocument.text', 
                  self.nFiles)
                  
-    def txtToXhtml(self, textFile):
+    def txtToXhtml(self, textFile, allNames):
         self.textFile = textFile
+        self.allNames = allNames
         self.mode = 0
         self.depureText()
         xhtmlContent = textile.textile(self.textPure, html_type='xhtml')
         self.fileOut = 'arquivo_resultante.xhtml'
         messages('XHTML', xhtmlContent, self.fileOut, 'application/xhtml+xml', self.nFiles)
     
-    def txtToPdf(self, textFile):
+    def txtToPdf(self, textFile, allNames):
         self.textFile = textFile
+        self.allNames = allNames
         self.mode = 1
         self.depureText()
         pdf = FPDF('L', 'mm', 'A4')   
@@ -245,15 +252,25 @@ class operatorsFiles():
         self.ioOds = bio.getvalue()
         
     def depureText(self):
+        w = 60
         self.textPure = ''
-        for text in self.textFile:
+        nFiles = len(self.textFile)
+        line = '_'*w
+        sign = '<=>'
+        for t, text in enumerate(self.textFile):
+            nameFile = self.allNames[t]
+            block = f'{nameFile} {sign} {t+1} de {nFiles}'
             if type(text) is list:
                 text = ''.join(text)
             if self.mode == 0:
+                self.textPure += f'{line}<br><br>{block}<br>'
+                self.textPure += f'{line}<br>'
                 self.textPure += '<br>' + text.replace('\n', '<br>')
             else:
-                self.textPure += text + '\n'
-        
+                self.textPure += f'{line}\n\n{block}\n'
+                self.textPure += f'{line}\n'
+                self.textPure += '\n' + text + '\n'        
+
 class main():
     def __init__(self): 
         self.setPage()
@@ -415,7 +432,7 @@ class main():
             textScreen = ('1️⃣ Exibe na tela, em formato :violet[**texto**] (📝) e logo '
                           ':violet[**abaixo**] (⇩) deste contêiner, o conteúdo dos arquivos '
                           'selecionados.\n\n'
-                          '2️⃣  É a única opção em que o conteúdo aparece :violet[**segmentado**] (✂️), '
+                          '2️⃣  Assim como nas outras, aqui o conteúdo aparecerá :violet[**segmentado**] (✂️), '
                           'isto é, arquivo por arquivo.\n\n')
             textLbd = lambda a: (f'1️⃣ Gera botão para :violet[**download**] (📥) de arquivo :violet[**{a}**] único com '
                                  'o conteúdo dos arquivos selecionados.\n\n'
@@ -425,7 +442,7 @@ class main():
             textAdds = (f'3️⃣ Devido a problemas de :violet[**formatação**] (⚙️), '
                         'o texto resultante poderá conter símbolos :violet[**estranhos**] (�).\n\n'  
                         '4️⃣ É sempre recomendável a :violet[**conferência**] (↔) com o original.\n\n'
-                        '5️⃣ O arquivo convertido não conservará nem herdará a formatação primitiva.\n\n'
+                        '5️⃣ Em geral, o arquivo convertido não conservará nem herdará a formatação primitiva.\n\n'
                         '6️⃣ Se qualquer dos arquivos selecionados for :violet[**PDF**], a :violet[**extração**] '
                         'de texto dependerá de ser ele :violet[**pesquisável**] (🔎) na origem ou após aplicação'
                         'de :violet[**OCR**] (https://pt.wikipedia.org/wiki/Reconhecimento_%C3%B3tico_de_caracteres).')
@@ -594,31 +611,31 @@ class main():
                 if self.screen: 
                     objOperat.txtToScroll(self.textFileAll, self.namesAll)
                 elif self.txt:
-                    objOperat.txtToTxt(self.textFileAll)
+                    objOperat.txtToTxt(self.textFileAll, self.namesAll)
                 elif self.docx:
-                    objOperat.txtToDocx(self.textFileAll)
+                    objOperat.txtToDocx(self.textFileAll, self.namesAll)
                 elif self.html: 
-                    objOperat.txtToHtml(self.textFileAll)
+                    objOperat.txtToHtml(self.textFileAll, self.namesAll)
                 elif self.rtf:
-                    objOperat.txtToRtf(self.textFileAll)
+                    objOperat.txtToRtf(self.textFileAll, self.namesAll)
                 elif self.ods:
-                    objOperat.txtToOdt(self.textFileAll)
+                    objOperat.txtToOdt(self.textFileAll, self.namesAll)
                 elif self.xhtml:
-                    objOperat.txtToXhtml(self.textFileAll)
+                    objOperat.txtToXhtml(self.textFileAll, self.namesAll)
                 elif self.pdf:
-                    objOperat.txtToPdf(self.textFileAll)
+                    objOperat.txtToPdf(self.textFileAll, self.namesAll)
         except Exception as error: 
             textError = f'Ocorreu o seguinte erro na operação:\n:green[***{error}***].' 
             objMens = messages(textError, None, None, None, None)
             objMens.mensError(textError) 
-
+        
     def checkSizeText(self):
         self.textFileStr = self.textFile.replace('\n', '').strip()
         if len(self.textFileStr) == 0:
             textRep = '-'*80
             textContent = 'Conteúdo não passível de leitura pela ferramenta!'
             self.textFile = f'\n{textContent.center(80, '#')}\n'
-            
+    
     def setPage(self):
         st.set_page_config(
         page_title="Ex-stream-ly Cool App",
@@ -636,12 +653,3 @@ if __name__ == '__main__':
     if 'fileDown' not in st.session_state:
         st.session_state.fileDown = True
     main()
-
-
-
-
-
-
-
-
-
