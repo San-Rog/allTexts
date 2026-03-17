@@ -604,7 +604,7 @@ class main():
                     self.textFile = objOperat.odtToTxt(down)
                 elif ext == '.rtf':
                     self.textFile = objOperat.rtfToTxt(down)
-                self.checkSizeText()
+                #self.checkSizeText()
                 self.textFileAll.append(self.textFile)
                 self.namesAll.append(nameDown)
             with st.spinner('❯❯❯❯ Operação em andamento...', show_time=True, width='content'):
