@@ -604,7 +604,7 @@ class main():
                     self.textFile = objOperat.odtToTxt(down)
                 elif ext == '.rtf':
                     self.textFile = objOperat.rtfToTxt(down)
-                #self.checkSizeText()
+                self.checkSizeText()
                 self.textFileAll.append(self.textFile)
                 self.namesAll.append(nameDown)
             with st.spinner('❯❯❯❯ Operação em andamento...', show_time=True, width='content'):
@@ -630,7 +630,10 @@ class main():
             objMens.mensError(textError) 
         
     def checkSizeText(self):
-        self.textFileStr = self.textFile.replace('\n', '').strip()
+        if type(self.textFile) == list:
+            self.textFileStr = self.textFile[0]
+        else:
+            self.textFileStr = self.textFile.replace('\n', '').strip()
         if len(self.textFileStr) == 0:
             textRep = '-'*80
             textContent = 'Conteúdo não passível de leitura pela ferramenta!'
